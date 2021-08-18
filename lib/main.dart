@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_todo/presentation/screens/todo_list.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -10,55 +12,91 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColor: Colors.black,
+        accentColor: Colors.cyan[600],
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: TodoScreen(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+class TodoScreen extends StatelessWidget {
+  const TodoScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(
+            'TODOS',
+            style: Theme.of(context)
+                .textTheme
+                .headline3!
+                .copyWith(color: Colors.white),
+          ),
+          bottom: TabBar(
+            indicatorColor: Colors.cyan[600],
+            indicatorWeight: 5.0,
+            tabs: [
+              Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text(
+                  'All',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text(
+                  'Completed',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                ),
+              ),
+            ],
+          ),
+        ),
+        body: SafeArea(
+          child: TabBarView(
+            children: [
+              Column(
+                children: [
+                  AddTodoPanel(),
+                  SizedBox(height: 20),
+                  Expanded(child: TodoList()),
+                ],
+              ),
+              Text('he')
+            ],
+          ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
+    );
+  }
+}
+
+class AddTodoPanel extends StatelessWidget {
+  const AddTodoPanel({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        children: [
+          Expanded(
+            child: TextField(
+              //   controller: _textEditingController,
+              decoration: const InputDecoration(hintText: 'New todo'),
+              // onSubmitted: _submit,
+            ),
+          ),
+          IconButton(
+            icon: const Icon(Icons.check),
+            onPressed: () {},
+          ),
+        ],
       ),
     );
   }
