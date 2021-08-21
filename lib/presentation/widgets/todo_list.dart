@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_todo/infrastructure/models/model.dart';
 import 'package:riverpod_todo/presentation/widgets/todo_item.dart';
 import 'package:riverpod_todo/providers.dart';
 
@@ -14,7 +13,6 @@ class TodoList extends ConsumerWidget {
     return Container(
       child: todoState.when(
         data: (todos) {
-          print(todos);
           return RefreshIndicator(
             child: todos.length > 0
                 ? ListView.builder(
@@ -28,18 +26,6 @@ class TodoList extends ConsumerWidget {
                     },
                     itemCount: todos.length,
                   )
-                // ? ListView(
-                //     children: [
-                //       ...todos
-                //           .map(
-                //             (todo) => ProviderScope(
-                //               overrides: [currentTodo.overrideWithValue(todo)],
-                //               child:  TodoItem(todoList:todo),
-                //             ),
-                //           )
-                //           .toList()
-                //     ],
-                //   )
                 : CircleAvatar(),
             onRefresh: () async {
               return await context
@@ -51,7 +37,11 @@ class TodoList extends ConsumerWidget {
         loading: () => const Center(
           child: CircularProgressIndicator(),
         ),
-        error: (error, st) => Container(),
+        error: (error, st) => Container(
+          child: Center(
+            child: Text(error.toString()),
+          ),
+        ),
       ),
       // child: ListView.builder(
       //   itemCount: 5,

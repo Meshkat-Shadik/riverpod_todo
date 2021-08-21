@@ -9,9 +9,21 @@ final todoRepositoryProvider = Provider<TodoRepository>((ref) {
   return TodoRepository();
 });
 
+final addTodoText = StateProvider<String>((ref) => '');
+
 final todosNotifierProvider =
     StateNotifierProvider<TodosNotifier, Todos>((ref) {
   return TodosNotifier(ref.read);
 });
 
 final currentTodo = ScopedProvider<Todo>((ref) => throw UnimplementedError());
+
+final completedTodosProvider = Provider<Todos>((ref) {
+  final todoState = ref.watch(todosNotifierProvider);
+  return todoState.when(
+    data: (todos) =>
+        Todos.data(todos.where((todo) => todo.completed == true).toList()),
+    loading: () => const Todos.loading(),
+    error: (error, st) => Todos.error(error, st),
+  );
+});
