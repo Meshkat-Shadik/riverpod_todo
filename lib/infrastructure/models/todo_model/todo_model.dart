@@ -30,6 +30,7 @@ abstract class Todo with _$Todo {
   factory Todo.create(String description) {
     return Todo(
       description: description,
+      completed: false,
       id: _uuid.v4(),
     );
   }

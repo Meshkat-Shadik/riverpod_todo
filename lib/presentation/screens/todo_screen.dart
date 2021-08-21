@@ -42,10 +42,16 @@ class TodoScreen extends StatelessWidget {
           child: TabBarView(
             children: [
               Column(
-                children: const [
+                children: [
                   AddTodoPanel(),
-                  SizedBox(height: 20),
-                  Expanded(child: TodoList()),
+                  Expanded(
+                    child: Column(
+                      children: const [
+                        SizedBox(height: 20),
+                        Expanded(child: TodoList()),
+                      ],
+                    ),
+                  ),
                 ],
               ),
               Text('he')

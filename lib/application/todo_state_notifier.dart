@@ -23,6 +23,7 @@ class TodosNotifier extends StateNotifier<Todos> {
 
   Future<void> addTodo(String description) async {
     try {
+      await read(todoRepositoryProvider).addTodo(description);
       state.maybeWhen(
         data: (todos) {
           state = Todos.data([...todos, Todo.create(description)]);

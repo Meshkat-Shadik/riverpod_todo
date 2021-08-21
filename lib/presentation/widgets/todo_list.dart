@@ -39,7 +39,12 @@ class TodoList extends ConsumerWidget {
         ),
         error: (error, st) => Container(
           child: Center(
-            child: Text(error.toString()),
+            child: Column(
+              children: [
+                Text(error.toString()),
+                ElevatedButton(onPressed: () {}, child: Text('Retry'))
+              ],
+            ),
           ),
         ),
       ),

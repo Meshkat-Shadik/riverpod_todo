@@ -4,31 +4,42 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../providers.dart';
 
 class AddTodoPanel extends ConsumerWidget {
-  const AddTodoPanel({Key? key}) : super(key: key);
+  AddTodoPanel({Key? key}) : super(key: key);
 
-  void _updateAddTodoText(BuildContext context, String todoDescription) {
-    context.read(addTodoText).state = todoDescription;
-  }
+  final _textEditingController = TextEditingController();
+
+  // void _submit(BuildContext context) {
+  //   context
+  //       .read(todosNotifierProvider.notifier)
+  //       .addTodo(_textEditingController.value.text);
+  //   _textEditingController.clear();
+  // }
 
   @override
   Widget build(BuildContext context, ScopedReader watch) {
+    //  final todoState = watch(todosNotifierProvider.notifier);
+    final String description = watch(addTodoText).state;
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Row(
         children: [
           Expanded(
             child: TextField(
-              //   controller: _textEditingController,
+              controller: _textEditingController,
               decoration: const InputDecoration(hintText: 'New todo'),
-              onChanged: (value) {
-                _updateAddTodoText(context, value);
+              onSubmitted: (value) {
+                context.read(todosNotifierProvider.notifier).addTodo(value);
               },
-              // onSubmitted: _submit,
             ),
           ),
           IconButton(
             icon: const Icon(Icons.check),
-            onPressed: () {},
+            onPressed: () {
+              context
+                  .read(todosNotifierProvider.notifier)
+                  .addTodo(_textEditingController.value.text.toString());
+            },
           ),
         ],
       ),
