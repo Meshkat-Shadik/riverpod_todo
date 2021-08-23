@@ -19,6 +19,11 @@ class _AddTodoPanelState extends ConsumerState<AddTodoPanel> {
     super.dispose();
   }
 
+  void _submit(String value) {
+    ref.read(todosNotifierProvider.notifier).addTodo(value);
+    _textEditingController.clear();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -30,16 +35,14 @@ class _AddTodoPanelState extends ConsumerState<AddTodoPanel> {
               controller: _textEditingController,
               decoration: const InputDecoration(hintText: 'New todo'),
               onSubmitted: (value) {
-                ref.read(todosNotifierProvider.notifier).addTodo(value);
+                _submit(value);
               },
             ),
           ),
           IconButton(
             icon: const Icon(Icons.check),
             onPressed: () {
-              ref
-                  .read(todosNotifierProvider.notifier)
-                  .addTodo(_textEditingController.value.text.toString());
+              _submit(_textEditingController.text.trim());
             },
           ),
         ],

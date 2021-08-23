@@ -83,4 +83,18 @@ class TodosNotifier extends StateNotifier<Todos> {
       state = Todos.error(e.failure.description, st);
     }
   }
+
+  Future<void> removeTodo(String id) async {
+    try {
+      await read(todoRepositoryProvider).removeTodo(id);
+      state.maybeWhen(
+        data: (todos) {
+          state = Todos.data(todos.where((todo) => todo.id != id).toList());
+        },
+        orElse: () {},
+      );
+    } on TodoException catch (e, st) {
+      state = Todos.error(e.failure.description, st);
+    }
+  }
 }

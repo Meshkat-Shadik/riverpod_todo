@@ -80,7 +80,11 @@ class _TodoItemState extends ConsumerState<TodoItem> {
                 ),
                 IconButton(
                   icon: const Icon(Icons.delete),
-                  onPressed: () {},
+                  onPressed: () {
+                    ref
+                        .read(todosNotifierProvider.notifier)
+                        .removeTodo(todo.id!);
+                  },
                 ),
               ],
             ),
