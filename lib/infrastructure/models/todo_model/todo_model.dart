@@ -2,7 +2,6 @@
 //
 //     final todoModel = todoModelFromJson(jsonString);
 
-import 'package:meta/meta.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'dart:convert';
 

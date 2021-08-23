@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:riverpod_todo/presentation/widgets/completed_todo_list.dart';
 import 'package:riverpod_todo/presentation/widgets/widgets.dart';
 
 class TodoScreen extends StatelessWidget {
@@ -55,9 +56,7 @@ class TodoScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              Center(
-                child: Text('Hi'),
-              )
+              const CompletedTodoList(),
             ],
           ),
         ),

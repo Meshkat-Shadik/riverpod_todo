@@ -56,15 +56,14 @@ class TodoRepository implements BaseTodoRespository {
   }
 
   @override
-  Future<void> markCompleted(String id) async {
-    await _waitRandomTime();
+  Future<void> toggle(String id) async {
     if (random.nextDouble() < errorLikelihood) {
       throw const TodoException(failure: TodoFailure.markCompletedFailure());
     } else {
       mockTodoStorage = mockTodoStorage.map((todo) {
         if (todo.id == id) {
           return todo.copyWith(
-            completed: todo.completed == true ? false : true,
+            completed: !todo.completed!,
           );
         }
         return todo;

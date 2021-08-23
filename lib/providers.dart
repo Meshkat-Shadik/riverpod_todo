@@ -27,3 +27,5 @@ final completedTodosProvider = Provider<Todos>((ref) {
     error: (error, st) => Todos.error(error, st),
   );
 });
+
+//final toggleCompleted ;

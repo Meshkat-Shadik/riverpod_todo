@@ -3,23 +3,24 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../providers.dart';
 
-class AddTodoPanel extends ConsumerWidget {
+class AddTodoPanel extends ConsumerStatefulWidget {
   AddTodoPanel({Key? key}) : super(key: key);
 
+  @override
+  _AddTodoPanelState createState() => _AddTodoPanelState();
+}
+
+class _AddTodoPanelState extends ConsumerState<AddTodoPanel> {
   final _textEditingController = TextEditingController();
 
-  // void _submit(BuildContext context) {
-  //   context
-  //       .read(todosNotifierProvider.notifier)
-  //       .addTodo(_textEditingController.value.text);
-  //   _textEditingController.clear();
-  // }
+  @override
+  void dispose() {
+    _textEditingController.dispose();
+    super.dispose();
+  }
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    //  final todoState = watch(todosNotifierProvider.notifier);
-    final String description = ref.watch(addTodoText).state;
-
+  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Row(

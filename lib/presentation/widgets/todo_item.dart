@@ -24,6 +24,7 @@ class TodoItem extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final todo = ref.watch(currentTodo);
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ListTile(
@@ -33,7 +34,11 @@ class TodoItem extends ConsumerWidget {
           children: [
             Checkbox(
               value: todo.completed,
-              onChanged: (_) {},
+              onChanged: (_) {
+                ref
+                    .read(todosNotifierProvider.notifier)
+                    .toggle(todo.id.toString());
+              },
             ),
             IconButton(
               icon: const Icon(Icons.delete),
