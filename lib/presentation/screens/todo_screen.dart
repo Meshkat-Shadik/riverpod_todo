@@ -40,6 +40,7 @@ class TodoScreen extends StatelessWidget {
         ),
         body: SafeArea(
           child: TabBarView(
+            physics: NeverScrollableScrollPhysics(),
             children: [
               Column(
                 children: [
@@ -54,7 +55,9 @@ class TodoScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              Text('he')
+              Center(
+                child: Text('Hi'),
+              )
             ],
           ),
         ),

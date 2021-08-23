@@ -16,9 +16,9 @@ class AddTodoPanel extends ConsumerWidget {
   // }
 
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
+  Widget build(BuildContext context, WidgetRef ref) {
     //  final todoState = watch(todosNotifierProvider.notifier);
-    final String description = watch(addTodoText).state;
+    final String description = ref.watch(addTodoText).state;
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -29,14 +29,14 @@ class AddTodoPanel extends ConsumerWidget {
               controller: _textEditingController,
               decoration: const InputDecoration(hintText: 'New todo'),
               onSubmitted: (value) {
-                context.read(todosNotifierProvider.notifier).addTodo(value);
+                ref.read(todosNotifierProvider.notifier).addTodo(value);
               },
             ),
           ),
           IconButton(
             icon: const Icon(Icons.check),
             onPressed: () {
-              context
+              ref
                   .read(todosNotifierProvider.notifier)
                   .addTodo(_textEditingController.value.text.toString());
             },

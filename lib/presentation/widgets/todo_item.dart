@@ -22,8 +22,8 @@ class TodoItem extends ConsumerWidget {
   // }
 
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
-    final todo = watch(currentTodo);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final todo = ref.watch(currentTodo);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ListTile(

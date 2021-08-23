@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_todo/presentation/widgets/todo_item.dart';
+import 'package:riverpod_todo/presentation/widgets/widgets.dart';
 import 'package:riverpod_todo/providers.dart';
 
-class TodoList extends ConsumerWidget {
-  const TodoList({Key? key}) : super(key: key);
+class CompletedTodoList extends ConsumerWidget {
+  const CompletedTodoList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final todoState = ref.watch(todosNotifierProvider);
+    final todoState = ref.watch(completedTodosProvider);
 
     return Container(
       child: todoState.when(

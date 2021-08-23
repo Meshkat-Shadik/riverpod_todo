@@ -16,7 +16,7 @@ final todosNotifierProvider =
   return TodosNotifier(ref.read);
 });
 
-final currentTodo = ScopedProvider<Todo>((ref) => throw UnimplementedError());
+final currentTodo = Provider<Todo>((ref) => throw UnimplementedError());
 
 final completedTodosProvider = Provider<Todos>((ref) {
   final todoState = ref.watch(todosNotifierProvider);
