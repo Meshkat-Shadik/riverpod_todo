@@ -58,4 +58,29 @@ class TodosNotifier extends StateNotifier<Todos> {
       state = Todos.error(e.failure.description, st);
     }
   }
+
+  Future<void> editTodo(String id, String description) async {
+    try {
+      await read(todoRepositoryProvider)
+          .editTodo(id: id, description: description);
+      state.maybeWhen(
+        data: (todos) {
+          state = Todos.data(
+            todos.map(
+              (todo) {
+                if (todo.id == id) {
+                  return todo.copyWith(description: description);
+                } else {
+                  return todo;
+                }
+              },
+            ).toList(),
+          );
+        },
+        orElse: () {},
+      );
+    } on TodoException catch (e, st) {
+      state = Todos.error(e.failure.description, st);
+    }
+  }
 }

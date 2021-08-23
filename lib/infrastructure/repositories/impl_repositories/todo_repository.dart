@@ -45,13 +45,23 @@ class TodoRepository implements BaseTodoRespository {
   }
 
   @override
-  Future<void> editTodo(
-      {required String id, required String description}) async {
-    await _waitRandomTime();
+  Future<void> editTodo({
+    required String id,
+    required String description,
+  }) async {
     if (random.nextDouble() < errorLikelihood) {
       throw const TodoException(failure: TodoFailure.editFailure());
     } else {
-      mockTodoStorage = mockTodoStorage.where((todo) => todo.id != id).toList();
+      // mockTodoStorage = mockTodoStorage.where((todo) => todo.id != id).toList();
+      mockTodoStorage = mockTodoStorage.map(
+        (todo) {
+          if (todo.id == id) {
+            return todo.copyWith(description: description);
+          } else {
+            return todo;
+          }
+        },
+      ).toList();
     }
   }
 
@@ -72,9 +82,12 @@ class TodoRepository implements BaseTodoRespository {
   }
 
   @override
-  Future<void> removeTodo(String id) {
-    // TODO: implement removeTodo
-    throw UnimplementedError();
+  Future<void> removeTodo(String id) async {
+    if (random.nextDouble() < errorLikelihood) {
+      throw const TodoException(failure: TodoFailure.removeFailure());
+    } else {
+      mockTodoStorage = mockTodoStorage.where((todo) => todo.id != id).toList();
+    }
   }
 
   Future<void> _waitRandomTime() async {
