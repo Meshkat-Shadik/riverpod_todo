@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../providers.dart';
 
 class AddTodoPanel extends ConsumerStatefulWidget {
-  AddTodoPanel({Key? key}) : super(key: key);
+ const AddTodoPanel({Key? key}) : super(key: key);
 
   @override
   _AddTodoPanelState createState() => _AddTodoPanelState();

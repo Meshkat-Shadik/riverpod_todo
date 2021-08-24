@@ -11,6 +11,9 @@ class TodoScreen extends StatelessWidget {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
+          actions: [
+           Menu(),
+          ],
           title: Text(
             'TODOS',
             style: Theme.of(context)
@@ -44,16 +47,10 @@ class TodoScreen extends StatelessWidget {
             physics: NeverScrollableScrollPhysics(),
             children: [
               Column(
-                children: [
+                children: const [
                   AddTodoPanel(),
-                  Expanded(
-                    child: Column(
-                      children: const [
-                        SizedBox(height: 20),
-                        Expanded(child: TodoList()),
-                      ],
-                    ),
-                  ),
+                  SizedBox(height: 20),
+                  Expanded(child: TodoList()),
                 ],
               ),
               const CompletedTodoList(),

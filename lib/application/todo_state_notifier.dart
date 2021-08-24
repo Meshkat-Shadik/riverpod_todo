@@ -1,5 +1,4 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_todo/infrastructure/models/exceptions/exceptions.dart';
 import 'package:riverpod_todo/infrastructure/models/model.dart';
 import 'package:riverpod_todo/providers.dart';
 import 'package:riverpod_todo/states/todo_state.dart';
@@ -37,6 +36,10 @@ class TodosNotifier extends StateNotifier<Todos> {
 
   Future<void> toggle(String id) async {
     try {
+      //    print(read(settingsProvider).state.deleteOnComplete);
+      if (read(settingsProvider).state.deleteOnComplete == true) {
+        await removeTodo(id);
+      }
       await read(todoRepositoryProvider).toggle(id);
       state.maybeWhen(
         data: (todos) {

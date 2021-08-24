@@ -28,4 +28,4 @@ final completedTodosProvider = Provider<Todos>((ref) {
   );
 });
 
-//final toggleCompleted ;
+final settingsProvider = StateProvider<Settings>((ref) => const Settings());

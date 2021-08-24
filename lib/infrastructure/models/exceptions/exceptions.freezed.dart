@@ -42,7 +42,7 @@ class _$TodoFailureTearOff {
   }
 
   MarkCompletedFailure markCompletedFailure(
-      {String description = 'Error toggling todo'}) {
+      {String description = 'Error marking to be a completed todo!'}) {
     return MarkCompletedFailure(
       description: description,
     );
@@ -701,9 +701,10 @@ class _$MarkCompletedFailureCopyWithImpl<$Res>
 /// @nodoc
 
 class _$MarkCompletedFailure implements MarkCompletedFailure {
-  const _$MarkCompletedFailure({this.description = 'Error toggling todo'});
+  const _$MarkCompletedFailure(
+      {this.description = 'Error marking to be a completed todo!'});
 
-  @JsonKey(defaultValue: 'Error toggling todo')
+  @JsonKey(defaultValue: 'Error marking to be a completed todo!')
   @override
   final String description;
 

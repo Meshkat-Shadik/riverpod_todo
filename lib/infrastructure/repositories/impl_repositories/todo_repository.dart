@@ -1,8 +1,7 @@
 import 'dart:convert';
 import 'dart:math';
 
-import 'package:riverpod_todo/infrastructure/models/exceptions/exceptions.dart';
-import 'package:riverpod_todo/infrastructure/models/todo_model/todo_model.dart';
+import 'package:riverpod_todo/infrastructure/models/model.dart';
 import 'package:riverpod_todo/infrastructure/repositories/base_repositories/base_todo_repository.dart';
 
 final _sampleJsonTodos = [
@@ -52,7 +51,6 @@ class TodoRepository implements BaseTodoRespository {
     if (random.nextDouble() < errorLikelihood) {
       throw const TodoException(failure: TodoFailure.editFailure());
     } else {
-      // mockTodoStorage = mockTodoStorage.where((todo) => todo.id != id).toList();
       mockTodoStorage = mockTodoStorage.map(
         (todo) {
           if (todo.id == id) {
