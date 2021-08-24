@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../../providers.dart';
+import 'package:riverpod_todo/providers.dart';
 
 class AddTodoPanel extends ConsumerStatefulWidget {
- const AddTodoPanel({Key? key}) : super(key: key);
+  const AddTodoPanel({Key? key}) : super(key: key);
 
   @override
   _AddTodoPanelState createState() => _AddTodoPanelState();
@@ -27,16 +26,15 @@ class _AddTodoPanelState extends ConsumerState<AddTodoPanel> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(8),
       child: Row(
         children: [
           Expanded(
             child: TextField(
               controller: _textEditingController,
               decoration: const InputDecoration(hintText: 'New todo'),
-              onSubmitted: (value) {
-                _submit(value);
-              },
+              onSubmitted: (value) => _submit,
+              //meaning (value) => _submit(value);
             ),
           ),
           IconButton(

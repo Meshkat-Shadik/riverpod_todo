@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:riverpod_todo/presentation/widgets/completed_todo_list.dart';
 import 'package:riverpod_todo/presentation/widgets/widgets.dart';
 
 class TodoScreen extends StatelessWidget {
@@ -11,8 +10,8 @@ class TodoScreen extends StatelessWidget {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          actions: [
-           Menu(),
+          actions: const [
+            Menu(),
           ],
           title: Text(
             'TODOS',
@@ -23,17 +22,17 @@ class TodoScreen extends StatelessWidget {
           ),
           bottom: TabBar(
             indicatorColor: Colors.cyan[600],
-            indicatorWeight: 5.0,
-            tabs: [
+            indicatorWeight: 5,
+            tabs: const [
               Padding(
-                padding: EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(8),
                 child: Text(
                   'All',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                 ),
               ),
               Padding(
-                padding: EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(8),
                 child: Text(
                   'Completed',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
@@ -44,7 +43,7 @@ class TodoScreen extends StatelessWidget {
         ),
         body: SafeArea(
           child: TabBarView(
-            physics: NeverScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             children: [
               Column(
                 children: const [

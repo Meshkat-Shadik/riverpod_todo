@@ -14,7 +14,10 @@ class CompletedTodoList extends ConsumerWidget {
       child: todoState.when(
         data: (todos) {
           return RefreshIndicator(
-            child: todos.length > 0
+            onRefresh: () async {
+              return ref.refresh(todosNotifierProvider.notifier).fetchTodos();
+            },
+            child: todos.isNotEmpty
                 ? ListView.builder(
                     itemBuilder: (context, index) {
                       return ProviderScope(
@@ -26,25 +29,20 @@ class CompletedTodoList extends ConsumerWidget {
                     },
                     itemCount: todos.length,
                   )
-                : CircleAvatar(),
-            onRefresh: () async {
-              return await ref
-                  .refresh(todosNotifierProvider.notifier)
-                  .fetchTodos();
-            },
+                : const Center(
+                    child: Text("Oppppsss!! You've no todos to be complete!"),
+                  ),
           );
         },
         loading: () => const Center(
           child: CircularProgressIndicator(),
         ),
-        error: (error, st) => Container(
-          child: Center(
-            child: Column(
-              children: [
-                Text(error.toString()),
-                ElevatedButton(onPressed: () {}, child: Text('Retry'))
-              ],
-            ),
+        error: (error, st) => Center(
+          child: Column(
+            children: [
+              Text(error.toString()),
+              ElevatedButton(onPressed: () {}, child: const Text('Retry'))
+            ],
           ),
         ),
       ),

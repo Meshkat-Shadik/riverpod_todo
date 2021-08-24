@@ -36,7 +36,7 @@ class _TodoItemState extends ConsumerState<TodoItem> {
     final todo = ref.watch(currentTodo);
 
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(8),
       child: FocusScope(
         child: Focus(
           onFocusChange: (isFocused) {

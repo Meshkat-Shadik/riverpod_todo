@@ -10,7 +10,7 @@ final _sampleJsonTodos = [
   '''{"description": "Play games", "id": "0704c57a-6901-40db-88dc-b22269af658b", "completed": false}''',
 ];
 
-const double errorLikelihood = 0.0;
+const double errorLikelihood = 0;
 
 class TodoRepository implements BaseTodoRespository {
   TodoRepository() : random = Random() {
