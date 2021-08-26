@@ -1,4 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_todo/application/states_events/states.dart';
+import 'package:riverpod_todo/application/todo_state_bloc_notifier.dart';
 import 'package:riverpod_todo/application/todo_state_notifier.dart';
 import 'package:riverpod_todo/infrastructure/models/model.dart';
 import 'package:riverpod_todo/infrastructure/repositories/impl_repositories/todo_repository.dart';
@@ -29,3 +31,10 @@ final completedTodosProvider = Provider<Todos>((ref) {
 });
 
 final settingsProvider = StateProvider<Settings>((ref) => const Settings());
+
+
+
+final todosBlocNotifier =
+    StateNotifierProvider<TodosNotifierBloc, TodoState>((ref) {
+  return TodosNotifierBloc(ref.read);
+});
